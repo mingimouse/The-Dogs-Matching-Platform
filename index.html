@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>유기견 매칭 플랫폼</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+    <!-- ===== 왼쪽 배너 영역 ===== -->
+    <aside class="sidebar">
+        <img src="./img/logo.png" alt="로고" class="sidebar-logo" />
+
+        <div class="sidebar-title-box">
+            <div class="sidebar-title-main">DB TEAM5</div>
+            <div class="sidebar-title-sub">유기견 매칭 플랫폼</div>
+        </div>
+
+        <ul class="member-list">
+            <li>C093299 홍민기</li>
+            <li>C089059 정도영</li>
+            <li>C289003 김건우</li>
+        </ul>
+
+        <form action="register.php" method="get" style="width: 100%;">
+            <button type="submit" class="signup-btn">회원가입</button>
+        </form>
+    </aside>
+
+    <!-- ===== 오른쪽 메인 영역 (1:1 분할) ===== -->
+    <main class="main">
+        <!-- 일반 사용자 로그인 -->
+        <section class="login-section">
+            <a href="user_login.php" style="text-decoration: none; color: inherit;">
+                <div class="login-card">
+                    <img src="./img/user.png" alt="입양 희망자" />
+                    <div class="login-text-main">입양자 로그인</div>
+                </div>
+            </a>
+        </section>
+
+        <!-- 유기견 보호소 로그인 -->
+        <section class="login-section">
+            <a href="shelter_login.php" style="text-decoration: none; color: inherit;">
+                <div class="login-card">
+                    <img src="./img/shelter.png" alt="유기견 보호소" />
+                    <div class="login-text-main">보호소 로그인</div>
+                </div>
+            </a>
+        </section>
+    </main>
+</div>
+</body>
+</html>
