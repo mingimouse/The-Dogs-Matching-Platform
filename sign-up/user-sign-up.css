@@ -6,13 +6,11 @@
 }
 
 body {
-    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     background-color: #f5f5f5;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
 }
 
 .signup-container {
@@ -22,10 +20,9 @@ body {
 }
 
 .signup-box {
-    background-color: #FFF4D6;
-    border-radius: 20px;
+    background-color: #ffefb8;
     padding: 50px 60px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     position: relative;
 }
 
@@ -53,7 +50,7 @@ body {
 
 .signup-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .icon-img img {
