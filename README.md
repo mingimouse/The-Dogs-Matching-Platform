@@ -8,7 +8,6 @@
 
 - [C093299 홍민기](https://github.com/mingimouse) [조장]
 - [C089059 정도영](https://github.com/JDoYoung)
-- [C084045 천성호](https://github.com/BM00000001)
 - [C289003 김건우](https://github.com/Geon-NI)
 
 ## 2. Overview
