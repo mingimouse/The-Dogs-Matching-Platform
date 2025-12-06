@@ -26,7 +26,7 @@ body {
 
 .sidebar-logo {
     width: 180px;
-    margin-bottom: 32px;    
+    margin-bottom: 5px;    
 }
 
 /* sidebar-title-box */
@@ -59,7 +59,7 @@ body {
     border-radius: 12px;
     border: none;
     background-color: #ffefb8;
-    font-size: 17px;
+    font-size: 23px;
     cursor: pointer;
     transition: 0.15s;
 }
