@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>보호소 정보</title>
+    <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="shelter-info.css">
 </head>
 
@@ -13,7 +14,7 @@
 
     <!-- 왼쪽 사이드바 -->
     <aside class="sidebar">
-        <div class="sidebar-logo-box">
+        <div class="sidebar-logo-box">  
             <!-- 보호소 로고 (클릭 시 이 페이지로 이동) -->
             <a href="shelter-info.html">
                 <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
@@ -22,12 +23,10 @@
 
         <div class="sidebar-shelter-name" id="sidebarShelterName">OOO 보호소</div>
 
-        <div class="sidebar-divider"></div>
-
         <nav class="sidebar-menu">
-            <button class="menu-btn">회원정보 수정</button>
+            <button class="menu-btn" onclick="location.href='shelter-edit.html'">회원정보 수정</button>
             <button class="menu-btn" onclick="location.href='dog-list.html'">유기견 관리</button>
-            <button class="menu-btn">공고 관리</button>
+            <button class="menu-btn" onclick="location.href='notice-list.html'">공고 관리</button>
         </nav>
 
         <button class="logout-btn">로그아웃</button>
