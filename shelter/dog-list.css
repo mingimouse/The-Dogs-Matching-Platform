@@ -3,26 +3,29 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 26px 24px 24px 40px;
+    padding: 30px 36px 36px 36px;
+    background-color: #f8f8f8;
+    font-size: 18px; /* 모든 폰트 기본 확대 */
 }
 
-/* 강아지 카드 리스트 (5열 그리드) */
+/* 강아지 카드 리스트 (4열 기준) */
 .dog-list {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    justify-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    justify-items: stretch;
 }
 
 /* 개별 카드 */
 .dog-card {
-    width: 90%;
-    background-color: #f6f6f6;
-    border: 2px solid #111;
-    border-radius: 18px;
+    width: 100%;
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* 이미지 영역 */
@@ -34,7 +37,6 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
-    overflow: hidden;
 }
 
 .dog_img {
@@ -45,17 +47,17 @@
 
 /* 상태 표시 바 */
 .status-bar {
-    width: 270px;
-    height: 45px;
+    width: calc(100% - 40px);
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 14px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 700;
-    color: white;
-    margin: 12px auto;
+    color: #fff;
+    margin: 16px 20px 10px 20px;
 }
 
 /* 상태별 색상 */
@@ -65,67 +67,59 @@
 
 /* 정보 텍스트 */
 .dog-info {
-    padding: 14px 22px 8px 22px;
-    font-size: 20px;
-    text-align: center;
+    padding: 18px 22px;
+    font-size: 18px;
 }
 
-/* 정보 항목 한 줄 */
 .info-row {
     display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    line-height: 2;
+    margin-bottom: 12px;
+    line-height: 1.7;
 }
 
 .info-label {
-    width: 56px;
-    font-weight: 600;
-    margin-right: 50px;
-    margin-left: 20px;
-    text-align: center;
+    width: 70px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #444;
+    margin-right: 12px;
 }
 
 .info-value {
     flex: 1;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 /* 건강 정보 버튼 */
 .health-btn {
-    margin: 8px 18px 12px 18px;
-    padding: 7px 0;
-    border-radius: 10px;
+    margin: 10px 20px 16px 20px;
+    padding: 10px 0;
+    border-radius: 12px;
     border: 2px dashed;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 700;
     cursor: pointer;
 }
 
-.health-complete {
-    border-color: #006bdb;
-    color: #006bdb;
-}
+.health-complete { color: #006bdb; border-color: #006bdb; }
+.health-missing { color: #e53935; border-color: #e53935; }
 
-.health-missing {
-    border-color: #e53935;
-    color: #e53935;
-}
-
-/* 수정/삭제 버튼 영역 */
+/* 수정/삭제 버튼 */
 .card-actions {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    padding-bottom: 14px;
+    gap: 12px;
+    padding: 12px;
 }
 
 .small-btn {
-    width: 120px;
-    border-radius: 10px;
-    padding: 7px 18px;
+    width: 50%;
+    border-radius: 12px;
+    padding: 10px 20px;
     border: none;
-    font-size: 14px;
+    font-size: 17px;
     cursor: pointer;
     color: white;
 }
@@ -133,48 +127,116 @@
 .edit-btn { background-color: #111; }
 .delete-btn { background-color: #e53935; }
 
-/* 하단 바 (페이지네이션 + 추가 버튼) */
+/* 하단 바 */
 .bottom-bar {
     display: flex;
     align-items: center;
     width: 100%;
     position: relative;
-    margin-top: 30px;
+    margin-top: 28px;
 }
 
-/* 페이지 번호 */
 .pagination {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 15px;
+    gap: 14px;
 }
 
 .page-btn {
-    width: 32px;
-    height: 32px;
+    margin-top: 50px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background-color: transparent;
     border: none;
-    font-size: 17px;
+    font-size: 18px;
     cursor: pointer;
 }
 
-/* 현재 페이지 */
 .page-btn.active {
     background-color: #ffd75c;
-    border: 2px solid #111;
 }
 
-/* 추가 버튼 */
 .add-btn {
-    margin-left: auto;
-    padding: 10px 40px;
-    border-radius: 999px;
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    padding: 14px 40px;
+    border-radius: 20px;
     background-color: #34332d;
     color: white;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 700;
     cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    transition: transform 0.15s ease;
+}
+
+.add-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* 모바일에서는 조금 더 작은 버튼 */
+@media (max-width: 600px) {
+    .add-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 26px;
+        font-size: 16px;
+    }
+}
+
+/* ========================= */
+/*           반응형          */
+/* ========================= */
+
+/* 3열 (태블릿 가로) */
+@media (max-width: 1400px) {
+    .dog-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 2열 (태블릿 세로) */
+@media (max-width: 1100px) {
+    .main-area {
+        padding: 24px 20px;
+    }
+
+    .dog-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .status-bar { font-size: 18px; height: 48px; }
+    .info-label, .info-value { font-size: 17px; }
+}
+
+/* 1열 (모바일) */
+@media (max-width: 700px) {
+    .page-container {
+        flex-direction: column;
+    }
+
+    .main-area {
+        padding: 20px 14px;
+    }
+
+    .dog-list {
+        grid-template-columns: 1fr;
+    }
+
+    .dog-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* 아주 작은 모바일 */
+@media (max-width: 430px) {
+    .status-bar { font-size: 16px; }
+    .info-label, .info-value { font-size: 15px; }
+    .small-btn { width: 120px; font-size: 15px; }
 }

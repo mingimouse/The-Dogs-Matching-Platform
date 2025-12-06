@@ -26,7 +26,7 @@ body {
 
 .profile-icon {
     width: 180px;
-    margin-bottom: 32px;    
+    margin-bottom: 5px;     
 }
 
 /* sidebar-title-box */
@@ -45,7 +45,6 @@ body {
 .menu {
     text-align: center;
     width: 100%;
-    font-size: 23px;
     line-height: 1.8;
     color: #555;
     margin-top: 70px;
@@ -59,7 +58,7 @@ body {
     border-radius: 12px;
     border: none;
     background-color: #ffefb8;
-    font-size: 17px;
+    font-size: 23px;
     cursor: pointer;
     transition: 0.15s;
 }
