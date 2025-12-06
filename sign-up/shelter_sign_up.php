@@ -150,7 +150,7 @@ try {
 
     // 9) 가입 완료 후 이동
     echo "<script>alert('보호소 회원가입이 완료되었습니다. 메인 페이지로 이동합니다.');";
-    echo "location.href='../index.html';</script>";
+    header("Location: ../index.html");
     exit;
 
 } catch (Exception $e) {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>보호소 정보</title>
+    <link rel="stylesheet" href="shelter-info.css">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- 왼쪽 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-logo-box">
+            <!-- 보호소 로고 (클릭 시 이 페이지로 이동) -->
+            <a href="shelter-info.html">
+                <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
+            </a>
+        </div>
+
+        <div class="sidebar-shelter-name" id="sidebarShelterName">OOO 보호소</div>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-menu">
+            <button class="menu-btn">회원정보 수정</button>
+            <button class="menu-btn" onclick="location.href='dog-list.html'">유기견 관리</button>
+            <button class="menu-btn">공고 관리</button>
+        </nav>
+
+        <button class="logout-btn">로그아웃</button>
+    </aside>
+
+    <!-- 오른쪽 메인 영역 -->
+    <main class="main-area">
+
+        <section class="info-section">
+            <div class="info-box">
+                <div class="icon phone-icon"></div>
+                <div class="info-text" id="shelterPhone">010-1234-5678</div>
+            </div>
+
+            <div class="info-box gray-bg">
+                <div class="icon location-icon"></div>
+                <div class="info-text" id="shelterAddress">
+                    서울시 노원구<br>ROBERT 프라자 2층
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="icon time-icon"></div>
+                <div class="info-text" id="shelterTime">09:00 ~ 18:00</div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="shelter-info.js"></script>
+</body>
+</html>

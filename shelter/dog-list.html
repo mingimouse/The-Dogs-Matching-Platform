@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유기견 관리</title>
+    <link rel="stylesheet" href="dog-list.css">
+</head>
+<body>
+
+<div class="page-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo-box">
+                    <a href="shelter-info.html">
+                        <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
+                    </a>
+                </div>
+
+        <div class="sidebar-shelter-name">OOO 보호소</div>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-menu">
+            <button class="menu-btn">회원정보 수정</button>
+            <button class="menu-btn active" onclick="location.href='dog-list.html'">유기견 관리</button>
+            <button class="menu-btn">공고 관리</button>
+        </nav>
+
+        <button class="logout-btn">로그아웃</button>
+    </aside>
+
+    <main class="main-area">
+        <section class="dog-list"></section>
+
+        <section class="bottom-bar">
+            <div class="pagination"></div>
+            <button type="button" class="add-btn">추가</button>
+        </section>
+    </main>
+</div>
+
+<script src="dog-list.js"></script>
+
+</body>
+</html>
