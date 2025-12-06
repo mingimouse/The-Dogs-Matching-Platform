@@ -62,13 +62,13 @@ body {
 }
 
 .icon-img img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 }
 
 .signup-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #333;
     margin-bottom: 6px;
@@ -88,7 +88,7 @@ body {
 .signup-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 /* 각 입력 그룹 */
