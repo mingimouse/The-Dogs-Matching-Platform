@@ -83,12 +83,6 @@ body {
     text-decoration: none;   /* 밑줄 제거 */
 }
 
-.sidebar form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
 .signup-btn:hover {
     background-color: #111;
     transform: translateY(-1px);

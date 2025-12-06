@@ -130,12 +130,12 @@ function render_dog_cards(dogs) {
                 <div class="info-row"><span class="info-label">몸무게</span><span class="info-value">${dog.dog_weight}</span></div>
             </div>
 
-            <button class="health-btn ${dog.health_status === "입력" ? "health-complete" : "health-missing"}">
-                ${dog.health_status === "입력" ? "건강정보 입력" : "건강정보 미입력"}
+            <button class="health-btn ${dog.health_status === '입력' ? 'health-complete' : 'health-missing'}"
+                onclick="location.href='dog-report.html'"> ${dog.health_status === "입력" ? "건강정보 입력" : "건강정보 미입력"}
             </button>
 
             <div class="card-actions">
-                <button class="small-btn edit-btn">수정</button>
+                <button class="small-btn edit-btn" onclick="location.href='dog-detail.html'">수정</button>
                 <button class="small-btn delete-btn">삭제</button>
             </div>
         </article>
