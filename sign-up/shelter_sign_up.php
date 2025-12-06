@@ -2,8 +2,8 @@
 // ============================
 // DB 접속 정보 (환경에 맞게 수정)
 // ============================
-$db_username = "C093299";        // 오라클 계정
-$db_password = "비밀번호여기에"; // 오라클 비밀번호
+$db_username = "C289003";        // 오라클 계정
+$db_password = "C289003"; // 오라클 비밀번호
 $db_connection_string = "203.249.87.57/orcl"; // 호스트/서비스명
 
 mb_internal_encoding("UTF-8");
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // 1) 폼 데이터 받기
 $username        = trim($_POST['username'] ?? '');
 $password        = trim($_POST['password'] ?? '');
-$shelter_name    = trim($_POST['shelter_name'] ?? '');
+$shelter_name    = trim($_POST['name'] ?? '');
 $contact_input   = trim($_POST['contact'] ?? '');
 $addr_city       = trim($_POST['addr_city'] ?? '');
 $addr_district   = trim($_POST['addr_district'] ?? '');
@@ -119,12 +119,12 @@ try {
     $sql_ins_shelter = "
         INSERT INTO SHELTER (
             shelter_id, password, shelter_name,
-            phone, address_detail, region_id,
+            phone, detail, region_id,
             open_time, close_time
         )
         VALUES (
             :shelter_id, :password, :shelter_name,
-            :phone, :address_detail, :region_id,
+            :phone, :detail, :region_id,
             :open_time, :close_time
         )
     ";
@@ -134,7 +134,7 @@ try {
     oci_bind_by_name($stmt_ins_shelter, ':password', $hashed_password);
     oci_bind_by_name($stmt_ins_shelter, ':shelter_name', $shelter_name);
     oci_bind_by_name($stmt_ins_shelter, ':phone', $contact);
-    oci_bind_by_name($stmt_ins_shelter, ':address_detail', $location_detail);
+    oci_bind_by_name($stmt_ins_shelter, ':detail', $location_detail);
     oci_bind_by_name($stmt_ins_shelter, ':region_id', $region_id);
     oci_bind_by_name($stmt_ins_shelter, ':open_time', $start_time);
     oci_bind_by_name($stmt_ins_shelter, ':close_time', $end_time);
