@@ -1,0 +1,321 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== 왼쪽 사이드바 ===== */
+.sidebar {
+    width: 300px;
+    background-color: #ffefb8;
+    border-right: 1px solid #e6dfc7;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-icon {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: #111;
+}
+
+/* 메뉴 */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: auto;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.menu-item.active {
+    background-color: rgba(51, 51, 51, 0.1);
+    font-weight: 700;
+    color: #111;
+}
+
+.logout-btn {
+    width: 70%;
+    padding: 12px 0;
+    border-radius: 999px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 20px auto 0;
+}
+
+.logout-btn:hover {
+    background-color: #111;
+    transform: translateY(-1px);
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== 오른쪽 메인 콘텐츠 ===== */
+.main-content {
+    flex: 1;
+    padding: 20px 0 0;        /* 위쪽에서부터 시작 */
+    background-color: #ffffff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* 안의 요소들을 가로 가운데 정렬 */
+}
+
+/* ===== 검색 필터 영역 (테이블 위, 오른쪽 정렬) ===== */
+.search-filter {
+    width: 90%;               /* 테이블과 같은 폭 */
+    background-color: transparent;
+    padding: 0 20px 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+}
+
+.filter-select {
+    width: 180px;
+    padding: 8px 12px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    transition: all 0.3s;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 36px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+    padding: 8px 24px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ===== 테이블 래퍼 ===== */
+.table-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;       /* 안쪽 요소 가로 가운데 */
+}
+
+/* ===== 테이블 컨테이너 ===== */
+.table-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;   /* 테이블을 가로 중앙에 */
+    overflow-y: auto;
+}
+
+/* ===== 보호소 테이블 ===== */
+.shelter-table {
+    width: 90%;                /* 90% 크기 */
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.shelter-table thead {
+    background-color: #ffefb8;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.shelter-table th {
+    padding: 16px 12px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    border-bottom: 2px solid #333;
+}
+
+.shelter-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.2s;
+}
+
+.shelter-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.shelter-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.shelter-table td {
+    padding: 18px 12px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+}
+
+.shelter-table td:first-child {
+    font-weight: 600;
+}
+
+/* ===== 페이지네이션 ===== */
+.pagination {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 20px 0 30px;
+    background-color: #fff;
+}
+
+.page-btn {
+    width: 33px;
+    height: 33px;
+    background-color: #fff;
+    border: 1.5px solid #ddd;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #333;
+}
+
+.page-btn.active {
+    background-color: #ffefb8;
+    border-color: #333;
+    color: #111;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .profile-icon {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .search-filter {
+        flex-wrap: wrap;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    .filter-select {
+        width: calc(50% - 5px);
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .shelter-table th,
+    .shelter-table td {
+        font-size: 12px;
+        padding: 12px 8px;
+    }
+}
