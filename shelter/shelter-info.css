@@ -1,0 +1,68 @@
+/* --- 메인 영역 --- */
+.main-area {
+    flex: 1;
+    height: 100vh;  
+    padding: 0;        
+}
+
+/* 3등분 그리드 */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 정확히 3등분 */
+    width: 100%;
+    height: 100%;                           
+}
+
+/* 각 칸 */
+.info-box {
+    position: relative;   
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background: #ffffff;
+}
+
+.info-box.gray-bg {
+    background: #f3f3f3;
+}
+
+/* 아이콘은 absolute로 맨 위 고정 */
+.icon {
+    position: absolute;
+    top: 80px;               
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    height: 380px;
+}
+
+/* info-text는 부모 flex 기준으로 중앙 정렬됨 */
+.info-text {
+    margin-top: 300px;     
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* 아이콘 배경 이미지 (이미지 추가하면 됨) */
+.phone-icon {
+    background-image: url('../img/phone.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.location-icon {
+    background-image: url('../img/location.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.time-icon {
+    background-image: url('../img/time.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

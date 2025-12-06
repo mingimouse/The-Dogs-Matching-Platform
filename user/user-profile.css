@@ -1,0 +1,235 @@
+/* ===== 오른쪽 메인 콘텐츠 ===== */
+.main-content {
+    flex: 1;
+    padding: 27px 36px 18px 36px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-title {
+    font-size: 27px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 23px;
+    width: 100%;
+    max-width: 820px;
+}
+
+/* ===== 폼 스타일 ===== */
+.profile-form {
+    width: 100%;
+    max-width: 820px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    width: 109px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+.form-input {
+    flex: 1;
+    padding: 13px 18px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    background-color: white;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 1.3px rgba(0, 0, 0, 0.1);
+}
+
+.form-input::placeholder {
+    color: #999;
+}
+
+.form-input.readonly {
+    background-color: #e0e0e0;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* 입력 필드 컨테이너 */
+.input-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* 입력 필드 행 배치 */
+.input-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-input.half {
+    flex: 1;
+    width: 100%;
+}
+
+.form-input.third {
+    flex: 1;
+    width: 100%;
+}
+
+/* 성별 버튼 */
+.gender-btn {
+    flex: 1;
+    padding: 13px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.gender-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #333;
+}
+
+.gender-btn.selected {
+    background-color: #e0e0e0;
+    color: #111;
+    border-color: #333;
+}
+
+/* 버튼 영역 */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.submit-btn,
+.delete-btn {
+    padding: 10px 27px;
+    border: none;
+    border-radius: 9px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-btn {
+    background-color: #333;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.delete-btn {
+    background-color: #dc0000;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #b00000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 27px 27px;
+    }
+
+    .sidebar {
+        width: 250px;
+    }
+
+    .profile-icon {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .main-content {
+        padding: 20px 14px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group label {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .input-row {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .form-input.half,
+    .form-input.third {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .submit-btn,
+    .delete-btn {
+        width: 100%;
+    }
+}

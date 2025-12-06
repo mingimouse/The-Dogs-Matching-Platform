@@ -77,11 +77,10 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
-.sidebar form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.signup-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;   /* 밑줄 제거 */
 }
 
 .signup-btn:hover {

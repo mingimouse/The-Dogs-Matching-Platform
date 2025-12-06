@@ -1,0 +1,249 @@
+/* ===== 오른쪽 메인 콘텐츠 ===== */
+.main-content {
+    flex: 1;
+    padding: 19px 25px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+/* ===== 검색 필터 영역 ===== */
+.search-filter {
+    background-color: #ffefb8;
+    padding: 12px;
+    border-radius: 7px;
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-input,
+.filter-select {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: #fff;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-input::placeholder {
+    color: #999;
+}
+
+.filter-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 36px;
+}
+
+.filter-select option {
+    padding: 10px;
+}
+
+.search-btn {
+    width: 42px;
+    height: 38px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ===== 유기견 카드 그리드 ===== */
+.dog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-bottom: 17px;
+}
+
+.dog-card {
+    background-color: #f6f6f6;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+}
+
+.dog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 11px rgba(0, 0, 0, 0.1);
+    border-color: #333;
+}
+
+.dog-image {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin: 0 auto 12px;
+    display: block;
+    background-color: #f6f6f6;
+    padding: 10px;
+}
+
+.dog-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.dog-shelter {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+.detail-btn {
+    width: 100%;
+    padding: 11.5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: auto;
+}
+
+.detail-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.detail-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ===== 페이지네이션 ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+}
+
+.page-btn {
+    width: 33px;
+    height: 33px;
+    background-color: #fff;
+    border: 1.5px solid #ddd;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #333;
+}
+
+.page-btn.active {
+    background-color: #ffefb8;
+    border-color: #333;
+    color: #111;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 13px 13px;
+    }
+
+    .sidebar {
+        width: 250px;
+    }
+
+    .profile-icon {
+        width: 120px;
+        height: 120px;
+    }
+
+    .dog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .main-content {
+        padding: 10px 6px;
+    }
+
+    .search-filter {
+        flex-direction: column;
+    }
+
+    .filter-input,
+    .filter-select {
+        width: 100%;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .dog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dog-grid {
+        grid-template-columns: 1fr;
+    }
+}
