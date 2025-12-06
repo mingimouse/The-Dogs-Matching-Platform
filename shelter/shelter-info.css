@@ -1,0 +1,157 @@
+/* 공통 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+/* 레이아웃 */
+.page-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- 사이드바 (다른 페이지랑 통일) --- */
+.sidebar {
+    width: 300px;
+    background-color: #ffefb8;
+    border-right: 1px solid #e6dfc7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-logo-box {
+    margin-bottom: 16px;
+}
+
+.sidebar-logo {
+    width: 140px;
+}
+
+.sidebar-shelter-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.sidebar-divider {
+    width: 100%;
+    height: 2px;
+    background-color: #222;
+    margin-bottom: 24px;
+}
+
+.sidebar-menu {
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 14px 0;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    border: none;
+    background-color: #ffefb8;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.menu-btn:hover {
+    background-color: #ffe896;
+    transform: translateY(-1px);
+}
+.menu-btn.active {
+    background-color: #f1d066;
+    font-weight: 700;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.logout-btn {
+    margin-top: auto;
+    width: 80%;
+    padding: 12px 0;
+    border-radius: 10px;
+    background-color: #34332d;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* --- 메인 영역 --- */
+.main-area {
+    flex: 1;
+    height: 100vh;  
+    padding: 0;        
+}
+
+/* 3등분 그리드 */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 정확히 3등분 */
+    width: 100%;
+    height: 100%;                           
+}
+
+/* 각 칸 */
+.info-box {
+    position: relative;   
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background: #ffffff;
+}
+
+.info-box.gray-bg {
+    background: #f3f3f3;
+}
+
+/* 아이콘은 absolute로 맨 위 고정 */
+.icon {
+    position: absolute;
+    top: 80px;               
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    height: 380px;
+}
+
+/* info-text는 부모 flex 기준으로 중앙 정렬됨 */
+.info-text {
+    margin-top: 300px;     
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* 아이콘 배경 이미지 (이미지 추가하면 됨) */
+.phone-icon {
+    background-image: url('../img/phone.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.location-icon {
+    background-image: url('../img/location.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.time-icon {
+    background-image: url('../img/time.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}

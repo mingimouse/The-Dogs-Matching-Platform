@@ -137,10 +137,11 @@ try {
     // 8) 커밋
     oci_commit($conn);
 
-    // 9) 가입 완료 후 이동 (원하는 페이지로 수정)
-    echo "<script>alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');";
-    echo "location.href='../index.html';</script>";
+    // 9) 가입 완료 후 이동
+    echo "<script>alert('입양자 회원가입이 완료되었습니다. 메인 페이지로 이동합니다.');";
+    header("Location: ../index.html");
     exit;
+
 
 } catch (Exception $e) {
     oci_rollback($conn);
