@@ -56,16 +56,6 @@
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-/* 심사 아이콘 */
-.review-icon {
-    width: 30px;
-    height: 30px;
-    display: block;
-    margin: auto;
-    object-fit: contain;
-    cursor: pointer;
-}
-
 /* ====== 하단 바 ====== */
 .bottom-bar {
     width: 100%;
@@ -108,4 +98,28 @@
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
+}
+
+/* ===== Lucide 아이콘 스타일 ===== */
+.review-icon {
+    width: 30px;
+    height: 30px;
+    stroke: #ffc400; 
+    stroke-width: 2;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* hover 효과 */
+.review-icon:hover {
+    stroke: #ff9800;
+    transform: scale(1.2);
+}
+
+/* click 효과 */
+.review-icon:active {
+    transform: scale(0.9);
+    stroke: #d9534f;
 }
