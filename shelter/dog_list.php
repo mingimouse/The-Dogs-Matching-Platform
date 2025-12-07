@@ -173,7 +173,7 @@ function getStatusTextClass($status) {
                         </button>
 
                         <form action="dog_save.php" method="post"
-                              onsubmit="return confirm('정말 삭제하시겠습니까?');" style="width:50%;">
+                              onsubmit="return confirm('정말 삭제하시겠습니까?');">
                             <input type="hidden" name="mode" value="delete">
                             <input type="hidden" name="dog_id" value="<?php echo $dog_id; ?>">
                             <button type="submit" class="small-btn delete-btn">삭제</button>
