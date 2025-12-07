@@ -1,5 +1,7 @@
 <?php
-// shelter_edit.php
+// =======================================
+// shelter_edit.php  - 보호소 정보 조회/수정
+// =======================================
 
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
@@ -14,7 +16,8 @@ if (!isset($_SESSION['shelter_id'])) {
     exit;
 }
 
-$shelter_id = $_SESSION['shelter_id'];
+$shelter_id   = $_SESSION['shelter_id'];
+$shelter_name = '보호소';   // 사이드바에 쓸 기본 이름
 
 // 2. Oracle DB 접속
 $db_username = 'C093299';
@@ -27,6 +30,25 @@ if (!$conn) {
     echo "DB 연결 실패 : " . htmlspecialchars($e['message'], ENT_QUOTES);
     exit;
 }
+
+/*
+ * 2-1. 사이드바에 표시할 보호소 이름 한 번 조회
+ *      (실패하면 기본값 '보호소' 그대로 사용)
+ */
+$sql_name = "
+    SELECT name
+    FROM SHELTER
+    WHERE shelter_id = :sid
+";
+$stmt_name = oci_parse($conn, $sql_name);
+oci_bind_by_name($stmt_name, ':sid', $shelter_id);
+if (oci_execute($stmt_name)) {
+    $row_name = oci_fetch_assoc($stmt_name);
+    if ($row_name && isset($row_name['NAME'])) {
+        $shelter_name = $row_name['NAME'];
+    }
+}
+oci_free_statement($stmt_name);
 
 // 3. mode=load → JSON으로 현재 보호소 정보 반환 (AJAX 용)
 $mode = $_GET['mode'] ?? '';
@@ -79,9 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $close_time      = trim($_POST['end_time']        ?? '');
 
     // 4-2. 필수값 체크
-    if ($phone === '' || $city === '' || $district === '' || $detail === '' ||
-        $open_time === '' || $close_time === '') {
-
+    if (
+        $phone === '' || $city === '' || $district === '' || $detail === '' ||
+        $open_time === '' || $close_time === ''
+    ) {
         echo "<script>alert('필수 정보를 모두 입력해주세요.'); history.back();</script>";
         oci_close($conn);
         exit;
@@ -109,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     oci_bind_by_name($stmt_region, ':district', $district);
     oci_execute($stmt_region);
 
-    $region_id = null;
+    $region_id  = null;
     $row_region = oci_fetch_assoc($stmt_region);
 
     if ($row_region) {
@@ -223,23 +246,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="page-container">
 
-        <!-- 사이드바 -->
+        <!-- 왼쪽 사이드바 -->
         <aside class="sidebar">
             <div class="sidebar-logo-box">
+                <!-- 보호소 로고 (클릭 시 이 페이지로 이동) -->
                 <a href="shelter_info.php">
+                    <!-- 경로 수정: ../img -->
                     <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
                 </a>
             </div>
 
-            <!-- 보호소 이름 (JS로 채움) -->
-            <div class="sidebar-shelter-name" id="sidebarShelterName"></div>
+            <!-- ★ DB에서 가져온 이름 -->
+            <div class="sidebar-shelter-name" id="sidebarShelterName">
+                <?php echo htmlspecialchars($shelter_name, ENT_QUOTES, 'UTF-8'); ?>
+            </div>
 
             <nav class="sidebar-menu">
-                <button class="menu-btn" onclick="location.href='shelter_edit.php'">회원정보 수정</button>
+                <button class="menu-btn active" onclick="location.href='shelter_edit.php'">회원정보 수정</button>
                 <button class="menu-btn" onclick="location.href='dog_list.php'">유기견 관리</button>
                 <button class="menu-btn" onclick="location.href='notice_list.php'">공고 관리</button>
             </nav>
 
+            <!-- 로그아웃 -->
             <form class="logout-btn" action="../login/logout.php" method="post">
                 <button type="submit" class="logout-font">로그아웃</button>
             </form>
@@ -247,9 +275,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- 메인 -->
         <main class="main-area">
-            <!-- ★ action, method 추가 -->
+            <!-- 보호소 정보 수정 폼 -->
             <form class="edit-form" id="shelterEditForm" action="shelter_edit.php" method="post">
-                <!-- 아이디 (DB에서 가져오기, 수정 불가) -->
+                <!-- 아이디 (수정 불가) -->
                 <div class="form-row">
                     <label for="username">아이디</label>
                     <input type="text" id="username" name="username" disabled>
@@ -261,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
                 </div>
 
-                <!-- 보호소명 (DB에서 가져오기, 수정 불가) -->
+                <!-- 보호소명 (수정 불가) -->
                 <div class="form-row">
                     <label for="shelter_name">보호소명</label>
                     <input type="text" id="shelter_name" name="shelter_name" disabled>
@@ -323,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "대구광역시": ["남구", "달서구", "달성군", "동구", "북구", "서구", "수성구", "중구"]
             };
 
-            const citySelect     = document.getElementById('addr_city');
+            const citySelect = document.getElementById('addr_city');
             const districtSelect = document.getElementById('addr_district');
 
             // 1-1) 드롭다운 기본 옵션 채우기
@@ -404,4 +432,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
+
 </html>
