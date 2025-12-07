@@ -4,38 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>공고 관리</title>
+
+    <!-- 기존 CSS -->
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="notice-list.css">
+
+    <!-- ⭐ Lucide CDN 추가 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
     <div class="page-container">
 
+        <!-- 사이드바 -->
         <aside class="sidebar">
-        <div class="sidebar-logo-box">
-            <!-- 보호소 로고 (클릭 시 이 페이지로 이동) -->
-            <a href="shelter_info.php">
-                <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
-            </a>
-        </div>
+            <div class="sidebar-logo-box">
+                <a href="shelter_info.php">
+                    <img src="../img/shelter.png" class="sidebar-logo" alt="로고">
+                </a>
+            </div>
 
-        <!-- ★ DB에서 가져온 이름 -->
-        <div class="sidebar-shelter-name" id="sidebarShelterName">
-            <?php echo htmlspecialchars($shelter_name); ?>
-        </div>
+            <div class="sidebar-shelter-name" id="sidebarShelterName">
+                <?php echo htmlspecialchars($shelter_name); ?>
+            </div>
 
-        <nav class="sidebar-menu">
-            <button class="menu-btn" onclick="location.href='shelter-edit.html'">회원정보 수정</button>
-            <button class="menu-btn" onclick="location.href='dog-list.html'">유기견 관리</button>
-            <button class="menu-btn active" onclick="location.href='notice-list.html'">공고 관리</button>
-        </nav>
+            <nav class="sidebar-menu">
+                <button class="menu-btn" onclick="location.href='shelter-edit.html'">회원정보 수정</button>
+                <button class="menu-btn" onclick="location.href='dog-list.html'">유기견 관리</button>
+                <button class="menu-btn active" onclick="location.href='notice-list.html'">공고 관리</button>
+            </nav>
 
-        <!-- 로그아웃 (원하면 나중에 logout.php 연결) -->
-        <form class="logout-btn" action="../login/logout.php" method="post">
-            <button type="submit" class="logout-font">로그아웃</button>
-        </form>
-    </aside>
+            <form class="logout-btn" action="../login/logout.php" method="post">
+                <button type="submit" class="logout-font">로그아웃</button>
+            </form>
+        </aside>
 
         <!-- 메인 영역 -->
         <main class="main-area">
@@ -51,18 +54,12 @@
                         <th>심사</th>
                     </tr>
                 </thead>
-                <tbody id="noticeBody">
-                    <td>
-                        <a href="notice-detail.html">
-                            <img src="../img/review.png" class="review-icon" alt="심사 아이콘">
-                        </a>
-                    </td>
 
-                    <!-- JS로 행 생성 -->
+                <tbody id="noticeBody">
+                    <!-- JS로 자동 생성 -->
                 </tbody>
             </table>
 
-            <!-- 하단 페이지네이션 -->
             <div class="bottom-bar">
                 <div class="pagination"></div>
                 <button class="save-btn">저장</button>
@@ -71,7 +68,16 @@
         </main>
     </div>
 
+    <!-- JS 파일 -->
     <script src="notice-list.js"></script>
+
+    <!--  Lucide 아이콘 렌더링 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
+    </script>
+
 </body>
 
 </html>
