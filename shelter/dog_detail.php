@@ -123,7 +123,7 @@ if ($is_edit) {
                 <button type="button" class="btn-yellow" id="btnUploadImage">
                     사진 등록
                 </button>
-                <a href="dog-report.html<?php echo $is_edit ? '?dog_id='.$dog_id : ''; ?>">
+                <a href="dog_report.php<?php echo $is_edit ? '?dog_id='.$dog_id : ''; ?>">
                     <button type="button" class="btn-navy" id="btnEditHealth">
                         건강 정보 수정
                     </button>
@@ -142,14 +142,14 @@ if ($is_edit) {
                     <label for="dog_breed">품종</label>
                     <input type="text" id="dog_breed" name="dog_breed"
                            value="<?php echo htmlspecialchars($dog_breed); ?>"
-                           placeholder="예) 비숑프리제">
+                           placeholder="예시: 포메라니안">
                 </div>
 
                 <div class="field-row">
                     <label for="dog_age">나이</label>
                     <input type="text" id="dog_age" name="dog_age"
                            value="<?php echo htmlspecialchars($dog_age); ?>"
-                           placeholder="예) 3 (숫자만)">
+                           placeholder="예시: 5 (숫자만 입력하세요)">
                 </div>
 
                 <div class="field-row gender-row">
@@ -169,14 +169,14 @@ if ($is_edit) {
                     <label for="dog_color">색</label>
                     <input type="text" id="dog_color" name="dog_color"
                            value="<?php echo htmlspecialchars($dog_color); ?>"
-                           placeholder="예) 흰색">
+                           placeholder="예시: 검정색">
                 </div>
 
                 <div class="field-row">
                     <label for="dog_weight">몸무게</label>
                     <input type="text" id="dog_weight" name="dog_weight"
                            value="<?php echo htmlspecialchars($dog_weight); ?>"
-                           placeholder="예) 3.2 (kg 생략 가능)">
+                           placeholder="예시: 3.2">
                 </div>
             </section>
 
