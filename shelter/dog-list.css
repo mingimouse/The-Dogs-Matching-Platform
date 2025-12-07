@@ -161,14 +161,14 @@
 
 .add-btn {
     position: fixed;
-    bottom: 32px;
-    right: 32px;
-    padding: 14px 40px;
+    bottom: 35px;
+    right: 40px;
+    padding: 10px 40px;
     border-radius: 20px;
     background-color: #34332d;
     color: white;
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     z-index: 999;
     box-shadow: 0 6px 14px rgba(0,0,0,0.18);
