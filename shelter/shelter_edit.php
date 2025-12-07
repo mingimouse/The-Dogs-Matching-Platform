@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav class="sidebar-menu">
                 <button class="menu-btn" onclick="location.href='shelter_edit.php'">회원정보 수정</button>
                 <button class="menu-btn" onclick="location.href='dog_list.php'">유기견 관리</button>
-                <button class="menu-btn" onclick="location.href='notice-list.html'">공고 관리</button>
+                <button class="menu-btn" onclick="location.href='notice_list.php'">공고 관리</button>
             </nav>
 
             <form class="logout-btn" action="../login/logout.php" method="post">

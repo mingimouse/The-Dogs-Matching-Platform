@@ -43,7 +43,7 @@ function render_rows(rows) {
             <td>
                 <a href="notice-detail.html">
                     <!-- Lucide 아이콘으로 변경 -->
-                    <i data-lucide="file-check-2" class="review-icon"></i>
+                    <i data-lucide="link" class="review-icon"></i>
                 </a>
             </td>
         `;
