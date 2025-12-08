@@ -188,8 +188,7 @@ function getStatusTextClass($status) {
 
                     <!-- 건강정보 버튼 (REPORT 여부로 색상 다르게) -->
                     <button
-                            class="health-btn <?php echo $hasReport ? 'health-complete' : 'health-missing'; ?>"
-                            onclick="location.href='dog-report.html?dog_id=<?php echo $dog_id; ?>'">
+                    class="health-btn <?php echo $hasReport ? 'health-complete' : 'health-missing'; ?>">
                         <?php echo $hasReport ? '건강정보 입력' : '건강정보 미입력'; ?>
                     </button>
 
