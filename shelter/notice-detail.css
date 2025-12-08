@@ -85,7 +85,7 @@
     width: 100%;
     max-width: 1150px;
     margin: 0 auto;
-}
+    }
 
 /* 테이블 기본 */
 .apply-table {
@@ -97,6 +97,7 @@
     border: 1px solid #000000;
     border-radius: 10px;
     overflow: hidden;
+
 }
 
 .apply-table thead th {
@@ -108,7 +109,7 @@
 
 .apply-table tbody td {
     height: 70px;
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
