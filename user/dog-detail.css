@@ -38,7 +38,7 @@
 }
 
 .dog-title {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
     color: #111;
 }
@@ -68,8 +68,8 @@
 }
 
 .dog-detail-image {
-    width: 100%;
-    max-width: 228px;
+
+    width: 280px;
     height: auto;
     object-fit: contain;
 }
@@ -100,16 +100,23 @@
 }
 
 .disease-table th {
-    font-size: 13px;
+    font-size: 20px;
     font-weight: 600;
     color: #111;
     border-bottom: 2px solid #333;
 }
 
 .disease-table td {
-    font-size: 14px;
-    font-weight: 500;
-    color: #111;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.yes {
+    color: #1e73ff;   /* 파란색: O */
+}
+
+.no {
+    color: #e53935;   /* 빨간색: X */
 }
 
 /* ===== 오른쪽 섹션 ===== */
@@ -142,13 +149,13 @@
 }
 
 .info-label {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     color: #111;
 }
 
 .info-value {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 400;
     color: #111;
     text-align: left;

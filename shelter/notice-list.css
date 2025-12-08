@@ -65,29 +65,6 @@
     position: relative;
 }
 
-/* ====== pagination (dog-list에서 복붙) ====== */
-.pagination {
-    position: absolute;
-    margin-top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-}
-
-.page-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.page-btn.active {
-    background-color: #ffd75c;
-}
 
 /* 저장 버튼 */
 .save-btn {
@@ -125,3 +102,53 @@
     transform: scale(0.9);
     stroke: #d9534f;
 }
+
+/* ====== pagination (dog-list에서 복붙) ====== */
+.bottom-bar {
+    width: 100%;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* pagination을 가운데 정렬시키는 핵심 */
+.pagination {
+    flex: 1;                    /* ← 가운데 공간 확보 */
+    display: flex;
+    justify-content: center;    /* 페이지 번호 중앙 배치 */
+    gap: 12px;
+}
+
+.save-btn {
+    margin-left: auto;          /* ← 오른쪽 끝으로 이동 */
+}
+
+.page-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease;
+    display: flex;
+    border-radius: 50%;
+}
+
+.page-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.page-btn.active {
+    background-color: #F4E5A1;
+    font-weight: 700;
+    color: #333;
+}
+

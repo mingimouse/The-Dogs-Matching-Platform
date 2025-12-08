@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             oci_commit($conn);
-            echo "<script>alert('공고 상태가 저장되었습니다.'); location.href='dog_list.php';</script>";
+            echo "<script>alert('공고 상태가 저장되었습니다.'); location.href='notice_list.php';</script>";
             oci_close($conn);
             exit;
 
@@ -77,24 +77,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 /* ==========================================================
-   GET: 목록 조회
-   - 현재 보호소가 가진 모든 강아지 + REPORT 유무
+   GET: 페이지네이션 설정
+   ========================================================== */
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$items_per_page = 5;
+$offset = ($page - 1) * $items_per_page;
+
+// 전체 강아지 수 조회
+$sql_count = "
+    SELECT COUNT(*) AS total
+    FROM DOG
+    WHERE shelter_id = :sid
+";
+$stmt_count = oci_parse($conn, $sql_count);
+oci_bind_by_name($stmt_count, ':sid', $shelter_id);
+oci_execute($stmt_count);
+$count_row = oci_fetch_assoc($stmt_count);
+$total_items = $count_row['TOTAL'];
+$total_pages = ceil($total_items / $items_per_page);
+oci_free_statement($stmt_count);
+
+/* ==========================================================
+   GET: 목록 조회 (페이지네이션 적용)
+   - 현재 보호소가 가진 강아지 + REPORT 유무
    ========================================================== */
 $sql = "
-    SELECT
-        d.dog_id,
-        d.name,
-        d.breed,
-        d.status,
-        CASE WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
-             THEN 'Y' ELSE 'N'
-        END AS has_report
-    FROM DOG d
-    WHERE d.shelter_id = :sid
-    ORDER BY d.dog_id DESC
+    SELECT *
+    FROM (
+        SELECT
+            d.dog_id,
+            d.name,
+            d.breed,
+            d.status,
+            CASE WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
+                 THEN 'Y' ELSE 'N'
+            END AS has_report,
+            ROW_NUMBER() OVER (ORDER BY d.dog_id DESC) AS rnum
+        FROM DOG d
+        WHERE d.shelter_id = :sid
+    )
+    WHERE rnum > :offset AND rnum <= :limit
 ";
 $stmt = oci_parse($conn, $sql);
 oci_bind_by_name($stmt, ':sid', $shelter_id);
+oci_bind_by_name($stmt, ':offset', $offset);
+$limit = $offset + $items_per_page;
+oci_bind_by_name($stmt, ':limit', $limit);
 oci_execute($stmt);
 
 // 행 번호용
@@ -166,15 +194,14 @@ oci_free_statement($stmt);
 
                 <tbody id="noticeBody">
                 <?php
-                $total = count($rows);
                 foreach ($rows as $idx => $dog) {
                     $dogId   = $dog['DOG_ID'];
                     $name    = $dog['NAME'];
                     $breed   = $dog['BREED'];
                     $status  = $dog['STATUS'];      // IN_CARE / AVAILABLE / ADOPTED
                     $hasRep  = $dog['HAS_REPORT'];  // Y/N
-                    // 목록 번호: 5,4,3,... 형태로 출력
-                    $listNo  = $total - $idx;
+                    // 목록 번호: 전체에서의 순서 계산
+                    $listNo  = $total_items - $offset - $idx;
 
                     // 표기용 강아지 이름 (ex. 쪼꼬 (포메라니안))
                     $dogLabel = $name . ' (' . $breed . ')';
@@ -222,8 +249,18 @@ oci_free_statement($stmt);
             </table>
 
             <div class="bottom-bar">
-                <!-- 페이지네이션은 나중에 필요하면 DB 기준으로 구현 -->
-                <div class="pagination"></div>
+
+                <!-- ✅ 페이지네이션: 메인 영역 맨 아래로 -->
+                <div class="pagination" id="pagination">
+                    <?php
+                    if ($total_pages > 1) {
+                        for ($p = 1; $p <= $total_pages; $p++) {
+                            $active_class = ($p == $page) ? "page-btn active" : "page-btn";
+                            echo "<a class=\"$active_class\" href=\"notice_list.php?page=$p\">$p</a>";
+                        }
+                    }
+                    ?>
+                </div>
 
                 <button type="submit" class="save-btn">저장</button>
             </div>
@@ -231,7 +268,7 @@ oci_free_statement($stmt);
         </form>
 
     </main>
-</div>
+</div>	
 
 <script>
     // 원래 notice-list.js에서 하던 역할을 이 안에서 DB 데이터 기준으로 수행

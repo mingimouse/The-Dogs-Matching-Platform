@@ -11,11 +11,16 @@ body {
 .container {
     display: flex;
     min-height: 100vh;
+    padding-left: 300px;
 }
 
 /* ===== 왼쪽 배너 영역 ===== */
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
+    height: 100vh;
     background-color: #ffefb8;
     border-right: 1px solid #e6dfc7;
     display: flex;
@@ -47,8 +52,7 @@ body {
     width: 100%;
     line-height: 1.8;
     color: #555;
-    margin-top: 70px;
-    margin-bottom: auto;
+    margin-top: 30px;
 }
 
 .menu-item {
@@ -74,8 +78,7 @@ body {
 
 /* signup-btn */
 .logout-btn {
-    margin-top: 32px;
-    margin-bottom: 50px;
+    margin-top: 30px;
     width: 70%;
     padding: 12px 0;
     border-radius: 20px;
@@ -93,4 +96,9 @@ body {
 .logout-btn:hover {
     background-color: #111;
     transform: translateY(-1px);
+}
+/* 메인 컨텐츠 영역 (사이드바 옆) */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
 }

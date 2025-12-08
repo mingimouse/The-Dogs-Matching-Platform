@@ -92,6 +92,29 @@
     width: 100%;
 }
 
+/* =============================
+   거주지 드롭다운 (shelter-edit 기반)
+   ============================= */
+
+/* 드롭다운이 들어있는 행은 input-row를 그대로 사용 */
+.input-row select.form-input {
+    padding: 12px 15px;      /* shelter-edit 과 비슷한 패딩 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 45px;            /* 살짝 낮은 높이로 드롭다운 느낌 */
+    background-color: #fff;
+    text-align: center;
+    appearance: none;        /* 기본 화살표 스타일 제거 (브라우저 기본 숨김) */
+}
+
+/* select 포커스 시도 input과 동일한 느낌 유지 */
+.input-row select.form-input:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 1.3px rgba(0, 0, 0, 0.1);
+}
+
 /* 성별 버튼 */
 .gender-btn {
     flex: 1;
@@ -120,7 +143,7 @@
 /* 버튼 영역 */
 .button-group {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
     margin-top: 18px;
 }
@@ -230,6 +253,7 @@
 
     .submit-btn,
     .delete-btn {
+	
         width: 100%;
     }
 }
