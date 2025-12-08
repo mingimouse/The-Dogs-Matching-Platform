@@ -1,19 +1,14 @@
-/* ===== 오른쪽 메인 콘텐츠 ===== */
+/* ====================== 메인 영역 ====================== */
 .main-content {
     flex: 1;
-    padding: 20px 0 0;        /* 위쪽에서부터 시작 */
+    padding: 70px 100px;
     background-color: #ffffff;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;       /* 안의 요소들을 가로 가운데 정렬 */
 }
 
-/* ===== 검색 필터 영역 (테이블 위, 오른쪽 정렬) ===== */
+/* ====================== 검색 필터 (표 우측 상단) ====================== */
 .search-filter {
-    width: 90%;               /* 테이블과 같은 폭 */
-    background-color: transparent;
-    padding: 0 20px 10px;
+    width: 100%;
+    margin-bottom: 30px;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -25,7 +20,7 @@
     padding: 8px 12px;
     border: 2px solid #333;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 23px;
     background-color: #fff;
     transition: all 0.3s;
     cursor: pointer;
@@ -40,16 +35,15 @@
 .filter-select:focus {
     outline: none;
     border-color: #333;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .search-btn {
-    padding: 8px 24px;
+    padding: 6px 24px;
     background-color: #333;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: 23px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
@@ -58,155 +52,73 @@
 .search-btn:hover {
     background-color: #555;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.search-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
-}
-
-/* ===== 테이블 래퍼 ===== */
-.table-wrapper {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    align-items: center;       /* 안쪽 요소 가로 가운데 */
-}
-
-/* ===== 테이블 컨테이너 ===== */
-.table-container {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;   /* 테이블을 가로 중앙에 */
-    overflow-y: auto;
-}
-
-/* ===== 보호소 테이블 ===== */
+/* ====================== 표 (notice와 동일) ====================== */
 .shelter-table {
-    width: 90%;                /* 90% 크기 */
+    width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.shelter-table thead {
-    background-color: #ffefb8;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.table-container thead th {
+    padding: 30px 10px;
+    font-size: 23px;
+    background-color: #faf4da;
+    border-bottom: 2px solid #000;
 }
 
-.shelter-table th {
-    padding: 16px 12px;
+.table-container tbody td {
     text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    color: #111;
-    border-bottom: 2px solid #333;
+    padding: 40px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 23px;
 }
 
-.shelter-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: all 0.2s;
-}
-
-.shelter-table tbody tr:hover {
-    background-color: #f9f9f9;
-}
-
-.shelter-table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.shelter-table td {
-    padding: 18px 12px;
-    text-align: center;
-    font-size: 20px;
-    color: #333;
-}
-
-.shelter-table td:first-child {
-    font-weight: 600;
-}
-
-/* ===== 페이지네이션 ===== */
-.pagination {
-    width: 90%;
-    margin: 0 auto;
+/* ====================== 하단 바 & 페이지네이션 ====================== */
+.bottom-section {
+    width: 100%;
+    margin-top: 26px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 9px;
-    padding: 20px 0 30px;
-    background-color: #fff;
+    position: relative;
+}
+
+.pagination {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .page-btn {
-    width: 33px;
-    height: 33px;
-    background-color: #fff;
-    border: 1.5px solid #ddd;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    font-size: 14px;
-    font-weight: 600;
+    text-decoration: none;
     color: #333;
-    cursor: pointer;
-    transition: all 0.3s;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease;
+    display: flex;
+    border-radius: 50%;
 }
 
 .page-btn:hover {
     background-color: #f0f0f0;
-    border-color: #333;
 }
 
 .page-btn.active {
-    background-color: #ffefb8;
-    border-color: #333;
-    color: #111;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 250px;
-    }
-
-    .profile-icon {
-        width: 120px;
-        height: 120px;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        padding: 30px 20px;
-    }
-
-    .search-filter {
-        flex-wrap: wrap;
-        padding: 10px 20px;
-        width: 100%;
-    }
-
-    .filter-select {
-        width: calc(50% - 5px);
-    }
-
-    .search-btn {
-        width: 100%;
-    }
-
-    .shelter-table th,
-    .shelter-table td {
-        font-size: 12px;
-        padding: 12px 8px;
-    }
+    background-color: #F4E5A1;
+    font-weight: 700;
+    color: #333;
 }

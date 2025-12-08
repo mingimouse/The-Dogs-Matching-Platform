@@ -24,29 +24,57 @@ if (!$conn) {
     die('DB 접속 실패: ' . htmlspecialchars($e['message']));
 }
 
-// 3) 강아지 목록 조회 (REPORT 존재 여부도 함께)
+/* ==========================================================
+   페이지네이션 설정
+   ========================================================== */
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$items_per_page = 4;
+$offset = ($page - 1) * $items_per_page;
+
+// 전체 강아지 수 조회
+$sql_count = "
+    SELECT COUNT(*) AS total
+    FROM DOG
+    WHERE shelter_id = :sid
+";
+$stmt_count = oci_parse($conn, $sql_count);
+oci_bind_by_name($stmt_count, ':sid', $shelter_id);
+oci_execute($stmt_count);
+$count_row = oci_fetch_assoc($stmt_count);
+$total_items = $count_row['TOTAL'];
+$total_pages = ceil($total_items / $items_per_page);
+oci_free_statement($stmt_count);
+
+// 3) 강아지 목록 조회 (REPORT 존재 여부도 함께) - 페이지네이션 적용
 $sql = "
-    SELECT
-        d.dog_id,
-        d.name,
-        d.breed,
-        d.age,
-        d.gender,
-        d.color,
-        d.weight,
-        d.image_url,
-        d.status,
-        CASE 
-            WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
-            THEN 'Y' ELSE 'N'
-        END AS has_report
-    FROM DOG d
-    WHERE d.shelter_id = :sid
-    ORDER BY d.dog_id DESC
+    SELECT *
+    FROM (
+        SELECT
+            d.dog_id,
+            d.name,
+            d.breed,
+            d.age,
+            d.gender,
+            d.color,
+            d.weight,
+            d.image_url,
+            d.status,
+            CASE 
+                WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
+                THEN 'Y' ELSE 'N'
+            END AS has_report,
+            ROW_NUMBER() OVER (ORDER BY d.dog_id DESC) AS rnum
+        FROM DOG d
+        WHERE d.shelter_id = :sid
+    )
+    WHERE rnum > :offset AND rnum <= :limit
 ";
 
 $stmt = oci_parse($conn, $sql);
 oci_bind_by_name($stmt, ':sid', $shelter_id);
+oci_bind_by_name($stmt, ':offset', $offset);
+$limit = $offset + $items_per_page;
+oci_bind_by_name($stmt, ':limit', $limit);
 oci_execute($stmt);
 
 // 카드 렌더링용 헬퍼 함수
@@ -184,9 +212,20 @@ function getStatusTextClass($status) {
             <?php endwhile; ?>
         </section>
 
-        <!-- 하단 바: 페이지네이션은 DB 연동 버전에선 생략 (원하면 나중에 구현) -->
+        <!-- 하단 바: 페이지네이션 + 추가 버튼 -->
         <section class="bottom-bar">
-            <div class="pagination"></div>
+            <!-- ✅ 페이지네이션 -->
+            <div class="pagination" id="pagination">
+                <?php
+                if ($total_pages > 1) {
+                    for ($p = 1; $p <= $total_pages; $p++) {
+                        $active_class = ($p == $page) ? "page-btn active" : "page-btn";
+                        echo "<a class=\"$active_class\" href=\"dog_list.php?page=$p\">$p</a>";
+                    }
+                }
+                ?>
+            </div>
+            
             <button type="button" class="add-btn" onclick="location.href='dog_detail.php'">추가</button>
         </section>
     </main>
