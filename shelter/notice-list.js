@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ------- 더미 데이터 ------- */
 const notice_data = [
-    { id: 5, name: "장군 (불독)",       adopt: false, notice: false, protect: true,  review_icon: "../img/review.png" },
-    { id: 4, name: "말콩 (리트리버)",   adopt: false, notice: true,  protect: false, review_icon: "../img/review.png" },
-    { id: 3, name: "까망 (푸들)",       adopt: false, notice: true,  protect: false, review_icon: "../img/review.png" },
-    { id: 2, name: "쪼꼬 (포메라니안)", adopt: true,  notice: false, protect: false, review_icon: "../img/review.png" },
-    { id: 1, name: "구름 (말티즈)",     adopt: true,  notice: false, protect: false, review_icon: "../img/review.png" }
+    { id: 5, name: "장군 (불독)",       adopt: false, notice: false, protect: true },
+    { id: 4, name: "말콩 (리트리버)",   adopt: false, notice: true,  protect: false },
+    { id: 3, name: "까망 (푸들)",       adopt: false, notice: true,  protect: false },
+    { id: 2, name: "쪼꼬 (포메라니안)", adopt: true,  notice: false, protect: false },
+    { id: 1, name: "구름 (말티즈)",     adopt: true,  notice: false, protect: false }
 ];
 
 function get_page_data(page, size = 5) {
@@ -42,12 +42,13 @@ function render_rows(rows) {
             <td><div class="circle ${row.protect ? "checked" : ""}" data-type="protect"></div></td>
             <td>
                 <a href="notice-detail.html">
-                    <img src="../img/review.png" class="review-icon" alt="심사 아이콘">
+                    <!-- Lucide 아이콘으로 변경 -->
+                    <i data-lucide="link" class="review-icon"></i>
                 </a>
             </td>
         `;
 
-        // 한 행당 상태 하나만 선택
+        // 한 행에서 상태 하나만 선택 가능
         const circles = tr.querySelectorAll(".circle");
         circles.forEach(circle => {
             circle.addEventListener("click", () => {
@@ -59,10 +60,12 @@ function render_rows(rows) {
 
         body.appendChild(tr);
     });
+
+    // 아이콘 다시 렌더링 (새로운 행 추가 후)
+    lucide.createIcons();
 }
 
-
-/* ===== pagination (dog-list랑 동일) ===== */
+/* ===== pagination ===== */
 function render_pagination(current, total) {
     const pagination = document.querySelector(".pagination");
     pagination.innerHTML = "";

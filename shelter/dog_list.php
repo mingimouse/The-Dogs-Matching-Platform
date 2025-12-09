@@ -24,29 +24,57 @@ if (!$conn) {
     die('DB 접속 실패: ' . htmlspecialchars($e['message']));
 }
 
-// 3) 강아지 목록 조회 (REPORT 존재 여부도 함께)
+/* ==========================================================
+   페이지네이션 설정
+   ========================================================== */
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$items_per_page = 4;
+$offset = ($page - 1) * $items_per_page;
+
+// 전체 강아지 수 조회
+$sql_count = "
+    SELECT COUNT(*) AS total
+    FROM DOG
+    WHERE shelter_id = :sid
+";
+$stmt_count = oci_parse($conn, $sql_count);
+oci_bind_by_name($stmt_count, ':sid', $shelter_id);
+oci_execute($stmt_count);
+$count_row = oci_fetch_assoc($stmt_count);
+$total_items = $count_row['TOTAL'];
+$total_pages = ceil($total_items / $items_per_page);
+oci_free_statement($stmt_count);
+
+// 3) 강아지 목록 조회 (REPORT 존재 여부도 함께) - 페이지네이션 적용
 $sql = "
-    SELECT
-        d.dog_id,
-        d.name,
-        d.breed,
-        d.age,
-        d.gender,
-        d.color,
-        d.weight,
-        d.image_url,
-        d.status,
-        CASE 
-            WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
-            THEN 'Y' ELSE 'N'
-        END AS has_report
-    FROM DOG d
-    WHERE d.shelter_id = :sid
-    ORDER BY d.dog_id DESC
+    SELECT *
+    FROM (
+        SELECT
+            d.dog_id,
+            d.name,
+            d.breed,
+            d.age,
+            d.gender,
+            d.color,
+            d.weight,
+            d.image_url,
+            d.status,
+            CASE 
+                WHEN EXISTS (SELECT 1 FROM REPORT r WHERE r.dog_id = d.dog_id)
+                THEN 'Y' ELSE 'N'
+            END AS has_report,
+            ROW_NUMBER() OVER (ORDER BY d.dog_id DESC) AS rnum
+        FROM DOG d
+        WHERE d.shelter_id = :sid
+    )
+    WHERE rnum > :offset AND rnum <= :limit
 ";
 
 $stmt = oci_parse($conn, $sql);
 oci_bind_by_name($stmt, ':sid', $shelter_id);
+oci_bind_by_name($stmt, ':offset', $offset);
+$limit = $offset + $items_per_page;
+oci_bind_by_name($stmt, ':limit', $limit);
 oci_execute($stmt);
 
 // 카드 렌더링용 헬퍼 함수
@@ -87,9 +115,9 @@ function getStatusTextClass($status) {
         </div>
 
         <nav class="sidebar-menu">
-            <button class="menu-btn" onclick="location.href='shelter-edit.html'">회원정보 수정</button>
+            <button class="menu-btn" onclick="location.href='shelter_edit.php'">회원정보 수정</button>
             <button class="menu-btn active" onclick="location.href='dog_list.php'">유기견 관리</button>
-            <button class="menu-btn" onclick="location.href='notice-list.html'">공고 관리</button>
+            <button class="menu-btn" onclick="location.href='notice_list.php'">공고 관리</button>
         </nav>
 
         <form class="logout-btn" action="../login/logout.php" method="post">
@@ -160,8 +188,7 @@ function getStatusTextClass($status) {
 
                     <!-- 건강정보 버튼 (REPORT 여부로 색상 다르게) -->
                     <button
-                            class="health-btn <?php echo $hasReport ? 'health-complete' : 'health-missing'; ?>"
-                            onclick="location.href='dog-report.html?dog_id=<?php echo $dog_id; ?>'">
+                    class="health-btn <?php echo $hasReport ? 'health-complete' : 'health-missing'; ?>">
                         <?php echo $hasReport ? '건강정보 입력' : '건강정보 미입력'; ?>
                     </button>
 
@@ -173,7 +200,7 @@ function getStatusTextClass($status) {
                         </button>
 
                         <form action="dog_save.php" method="post"
-                              onsubmit="return confirm('정말 삭제하시겠습니까?');" style="width:50%;">
+                              onsubmit="return confirm('정말 삭제하시겠습니까?');">
                             <input type="hidden" name="mode" value="delete">
                             <input type="hidden" name="dog_id" value="<?php echo $dog_id; ?>">
                             <button type="submit" class="small-btn delete-btn">삭제</button>
@@ -184,9 +211,20 @@ function getStatusTextClass($status) {
             <?php endwhile; ?>
         </section>
 
-        <!-- 하단 바: 페이지네이션은 DB 연동 버전에선 생략 (원하면 나중에 구현) -->
+        <!-- 하단 바: 페이지네이션 + 추가 버튼 -->
         <section class="bottom-bar">
-            <div class="pagination"></div>
+            <!-- ✅ 페이지네이션 -->
+            <div class="pagination" id="pagination">
+                <?php
+                if ($total_pages > 1) {
+                    for ($p = 1; $p <= $total_pages; $p++) {
+                        $active_class = ($p == $page) ? "page-btn active" : "page-btn";
+                        echo "<a class=\"$active_class\" href=\"dog_list.php?page=$p\">$p</a>";
+                    }
+                }
+                ?>
+            </div>
+            
             <button type="button" class="add-btn" onclick="location.href='dog_detail.php'">추가</button>
         </section>
     </main>
